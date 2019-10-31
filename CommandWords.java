@@ -13,25 +13,35 @@ import java.util.HashMap;
 
 public class CommandWords
 {
-    // a constant array that holds all valid command words 
-    // if you can be bothered to change a bunch of stuff
-    // then this could (and maybe should...) become an enum
-    private static final String[] VALID_COMMANDS = 
-	{
-        "go", "quit", "help", "look", "take", "drop", "give", "test"
-    };
+    private HashMap<String, CommandWord> commands;
 
     /**
      * Constructor - initialise the command words.
      */
     public CommandWords()
     {
-        /*
-        validCommands = new HashMap<>();
-     validCommands.put("go", CommandWord.GO);
-      validCommands.put("help", CommandWord.HELP);
-      validCommands.put("quit", CommandWord.QUIT);
-*/
+        // a constant array that holds all valid command words 
+    // if you can be bothered to change a bunch of stuff
+    // then this could (and maybe should...) become an enum
+    // private static final String[] VALID_COMMANDS = 
+	// {
+    //     "go", "quit", "help", "look", "take", "drop", "give", "test"
+    // };
+        commands = new HashMap<>();
+        for(CommandWord command : CommandWord.values()) {
+            if (command != CommandWord.UNKNOWN){
+                commands.put(command.toString(), command);
+            }
+        }
+    }
+
+    public CommandWord getCommand(String commandWord){
+        CommandWord command = commands.get(commandWord);
+        if(command != null) {
+            return command;
+        } else {
+            return CommandWord.UNKNOWN;
+        }
     }
 
     /**
@@ -41,29 +51,17 @@ public class CommandWords
      */
     public boolean isCommand(String aString)
     {
-        for(int i = 0; i < VALID_COMMANDS.length; i++)
-		{
-            if(VALID_COMMANDS[i].equals(aString))
-			{
-                return true;
-			}
-        }
-        // if we get here, the string was not found in the commands
-        return false;
+        return commands.containsKey(aString);
     }
 
-    public String[] getValidCommands() 
+    /**
+     * Print all valid commands to System.out.
+     */
+    public void showAll()
     {
-		return VALID_COMMANDS;
+        for(String command : commands.keySet()) {
+            System.out.print(command + " ");
+        }
+        System.out.println();
     }
-/**
- * Print all valid commands to System.out.
- */
-public void showAll()
-{
- for(String command : VALID_COMMANDS) {
- System.out.print(command + " ");
- }
- System.out.println();
-}
 }

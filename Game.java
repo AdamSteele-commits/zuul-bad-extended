@@ -83,11 +83,6 @@ public class Game
 
         theatre.setExit("south", outside);
         currentRoom = outside;  // start game outside
-
-        if ((currentRoom.equals(lab) || (currentRoom.equals(pub))))
-		{
-            System.out.println("There is no door!");
-        } 
         
     }
 
@@ -122,12 +117,7 @@ public class Game
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
-        System.out.println(currentRoom.getLongDescription());
-
-        
-        
-
-        
+        System.out.println(currentRoom.getLongDescription());        
     }
 
 
